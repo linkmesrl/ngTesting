@@ -77,3 +77,15 @@ In the `package.json` file, within the `scripts` section, add:
 As you have defined a `npm test` script, you can execute your test with this command, if everything has worked you should see:
 
 ![Karma message for working tests](./readme_assets/testEnv.png)
+
+## Our first Spec
+
+Create a `listCtrl.test.js` in `spec/unit` folder.
+
+We need to test the `addProduct()` function, so the step we need to do are:
+
+- Load the module before any test
+- Inject the `$controller` mock before any test
+- Setup our `listController` with a mocked `$scope`
+- Trigger the `addProduct()` function
+- Check for the expected result

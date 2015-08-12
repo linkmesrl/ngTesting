@@ -12,7 +12,7 @@ describe('ListController', function() {
 
   describe('the addProduct function', function() {
 
-    it('should insert a produc in the list', function() {
+    it('should insert a product in the list', function() {
 
       // Load my controller with a fake $scope
       var $scope = {};
