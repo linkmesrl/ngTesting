@@ -6,7 +6,9 @@
   "scripts": {
     "test": "karma start",
     "start": "eslint .; browser-sync start --server src --files='src/**/*.html, src/**/*.js'",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "pree2e": "webdriver-manager update",
+    "e2e": "npm start & protractor protractor.conf.js"
   },
   "author": "Matteo Scandolo",
   "license": "MIT",
@@ -19,6 +21,7 @@
     "karma-mocha-reporter": "^1.1.1",
     "karma-ng-html2js-preprocessor": "^0.1.2",
     "karma-phantomjs-launcher": "^0.2.1",
-    "phantomjs": "^1.9.18"
+    "phantomjs": "^1.9.18",
+    "protractor": "^2.1.0"
   }
 }

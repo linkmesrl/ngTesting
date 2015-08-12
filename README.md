@@ -216,3 +216,51 @@ it('...', function(){
   var res = $filter('filterName')(input, param);
 })
 ```
+
+## Setting up Protractor Environment
+
+In order to run End-tp-End Tests we need to change the tools we are using, swithcing from `Karma` to `Protractor` as test runner, but remaining with `Jasmine` as assertion library.
+
+To install protractor:
+
+`npm install protractor --save-dev`
+
+## Create a Protractor Configuration File
+
+In the `protractor.conf.js` we should define:
+
+- The browser in which run the tests
+- The Assertion Framework
+- The `spec` files
+- The Application base Url
+
+_NOTE: Protractor will not run the application for us, it should be served somewhere_
+
+### E2E Specs
+
+In `e2e tests` specs are separated in two pieces:
+
+- `*.po.js` => PageObject Files, represents helper to abstract the page structure from files, more information [here](https://docs.google.com/presentation/d/1B6manhG0zEXkC-H-tPo2vwU06JhL8w9-XCF9oehXzAQ)
+- `*.test.js` => Spec files, contain the real test.
+
+So let's create a **PO** files to abstract:
+
+- products list => the list of products
+- newProductName => the new Product Name field
+- newProductCategory => the new Product Category field
+- newProductQuantity => the new Product Quantity field
+- addProduct => the form button
+
+and a **Spec** file to test that:
+
+- The correct number of products are rendered in the list
+- A new product is added to the list
+
+### E2E Test script
+
+As for `unit` tests, we should create a `npm` script to execute our test, in `package.json` scripts section, add:
+
+```
+"pree2e": "webdriver-manager update",
+"e2e": "npm start & protractor protractor.conf.js"
+```
