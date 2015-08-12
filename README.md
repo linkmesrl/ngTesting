@@ -55,14 +55,22 @@ Set a `basePath` to `./`
 
 Add this files to the list:
 
-- `'src/vendor/angular/angular.min.js',`
-- `'src/vendor/angular-route/angular-route.min.js',`
-- `'src/vendor/angular-google-maps/dist/angular-google-maps.min.js',`
-- `'src/vendor/lodash/lodash.min.js',`
-- `'src/vendor/angular-mocks/angular-mocks.js',`
-- `'src/js/main.js',`
-- `'src/js/*.js',`
-- `'spec/unit/*.test.js'`
+`'src/vendor/angular/angular.min.js',`
+
+`'src/vendor/angular-route/angular-route.min.js',`
+
+`'src/vendor/angular-google-maps/dist/angular-google-maps.min.js',`
+
+`'src/vendor/lodash/lodash.min.js',`
+
+`'src/vendor/angular-mocks/angular-mocks.js',`
+
+`'src/js/main.js',`
+
+`'src/js/*.js',`
+
+`'spec/unit/*.test.js'`
+
 
 Change the reporte from `progress` to `mocha`
 
