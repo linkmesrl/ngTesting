@@ -179,3 +179,23 @@ Jasmine provide a `spyOn` method that let us check this, the steps are:
 - Mock the external service
 - Mock the function with a `spy`
 - Check the `spy`
+
+## Mocking the Backend
+
+In a context of `isolation` is a good idea to mock all the `http` request from our application. In this way our tests will not depend on the backend status.
+
+Angular provide a service called `$httpBackend` that is intended to mock our request, and it can be configured in this way:
+
+```
+beforeEach(inject(function($http, $rootScope){
+    rootScope = $rootScope;
+    http = $http;
+}));
+
+beforeEach(inject(function($httpBackend){
+    $httpBackend.when('GET', 'url')
+        .respond(status, data);
+}));
+```
+
+This is also a good method to test server errors handling, providing fake responses.

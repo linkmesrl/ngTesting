@@ -3,11 +3,13 @@ describe('ListController', function() {
   // load the application module
   beforeEach(module('groceryStore'));
 
-  var $controller;
+  var $controller, http, httpBackend, rootScope;
 
-  beforeEach(inject(function(_$controller_){
+  beforeEach(inject(function(_$controller_, $http, $rootScope){
     // The injector unwraps the underscores (_) from around the parameter names when matching
     $controller = _$controller_;
+    rootScope = $rootScope;
+    http = $http;
   }));
 
   describe('the addProduct function', function() {
@@ -29,5 +31,66 @@ describe('ListController', function() {
       expect($scope.products.length).toEqual(1);
     });
 
+  });
+
+  describe('when the backend is correctly responding', function() {
+    // injecting an $http mock using angular $httpBackend
+    // we need to mock the controller scope and the fake backend while injeacting a real $http service
+    beforeEach(inject(function($httpBackend) {
+      httpBackend = $httpBackend;
+
+      httpBackend.when('GET', '../mocks/list.json')
+        .respond([
+          {
+            category: 'Fruit',
+            name: 'Apple',
+            quantity: 12
+          },
+          {
+            category: 'Fruit',
+            name: 'Banana',
+            quantity: 10
+          },
+          {
+            category: 'Fruit',
+            name: 'Mango',
+            quantity: 12
+          },
+          {
+            category: 'Fruit',
+            name: 'Pineapple',
+            quantity: 10
+          }
+        ]);
+    }));
+
+    it('should retrieve 4 products', function(){
+      $controller('listCtrl', {
+        $scope: rootScope,
+        $http: http
+      });
+      httpBackend.flush();
+      expect(rootScope.products.length).toEqual(4);
+    });
+  });
+
+  describe('When the backend is down', function() {
+    // injecting an $http mock using angular $httpBackend
+    // we need to mock the controller scope and the fake backend while injeacting a real $http service
+    beforeEach(inject(function($httpBackend){
+
+      httpBackend = $httpBackend;
+
+      httpBackend.when('GET', '../mocks/list.json').respond(404, 'Not Found');
+    }));
+
+    it('should show an error', function(){
+      $controller('listCtrl', {
+        $scope: rootScope,
+        $http: http
+      });
+      httpBackend.flush();
+      expect(rootScope.errors).toEqual('Not Found');
+    });
   });
 });
