@@ -54,6 +54,7 @@ You will be asked for:
 Set a `basePath` to `./`
 
 Add this files to the list:
+
 - `'src/vendor/angular/angular.min.js',`
 - `'src/vendor/angular-route/angular-route.min.js',`
 - `'src/vendor/angular-google-maps/dist/angular-google-maps.min.js',`
