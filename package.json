@@ -1,0 +1,16 @@
+{
+  "name": "ng-testing",
+  "version": "1.0.0",
+  "description": "A basic environment for angular testing",
+  "main": "index.js",
+  "scripts": {
+    "start": "eslint .; browser-sync start --server src --files='src/**/*.html, src/**/*.js'",
+    "lint": "eslint ."
+  },
+  "author": "Matteo Scandolo",
+  "license": "MIT",
+  "devDependencies": {
+    "browser-sync": "^2.8.2",
+    "eslint": "^1.1.0"
+  }
+}

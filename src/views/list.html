@@ -1,0 +1,35 @@
+<div class="well">
+    <div class="row">
+        <div class="col-xs-12">
+            <h3>Insert a new product:</h3>
+        </div>
+    </div>
+    <div class="row">
+        <form ng-submit="addProduct()" ng-init="products = []">
+            <div class="col-sm-6 col-md-3">
+                <div class="form-group">
+                    <label>Category</label>
+                    <select ng-model="newProduct.category" ng-options="category for category in categories" class="form-control"></select>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+                <div class="form-group">
+                    <label>Name</label>
+                    <input ng-model="newProduct.name" type="text" class="form-control">
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+                <div class="form-group">
+                    <label>Quantity</label>
+                    <input ng-model="newProduct.quantity" type="number" class="form-control">
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3 text-right">
+                <div class="form-group">
+                    <button class="btn btn-primary label-top">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<product-list products="products" page-size="20"></product-list>
