@@ -217,6 +217,14 @@ it('...', function(){
 })
 ```
 
+## Unit test expected result
+
+If everything has gone in a correct way, running `npm test` you should see this:
+
+![Mocha reporter for successfull tests](./readme_assets/successTest.png)
+
+***
+
 ## Setting up Protractor Environment
 
 In order to run End-tp-End Tests we need to change the tools we are using, swithcing from `Karma` to `Protractor` as test runner, but remaining with `Jasmine` as assertion library.
