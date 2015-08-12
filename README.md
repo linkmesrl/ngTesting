@@ -118,3 +118,54 @@ As this directive is using `cartService` to retrieve cart data, we should mock i
 
 - Inject `cartService`
 - Mock out `.cart` data
+
+### Testing directives with an external template
+
+To test a `directive` that use an external `html` template, the easiest way is to use angular's `$templateCache` service with a prepocessor called: **ng-html2js** (_it was installed with `npm install karma-ng-html2js-preprocessor`_).
+
+Basically it loads our `templates` and create an angular module that provide them to the tests.
+
+In `karma.conf.js` add:
+
+```
+    files: [
+        ...,
+        // load the html files
+        // they have to be preprocessed and cached
+        'src/views/**/*.html'
+    ],
+
+    preprocessors: {
+      'src/views/**/*.html': 'ng-html2js'
+    },
+
+    ngHtml2JsPreprocessor: {
+      stripPrefix: 'src/', //strip the src path from template url (http://stackoverflow.com/questions/22869668/karma-unexpected-request-when-testing-angular-directive-even-with-ng-html2js)
+      moduleName: 'templates' // define the template module name
+    },
+```
+
+### Passing attributes to Directives
+
+Often Angular's directive grab their data trough an `isolatedScope`, and the data are provided as `attributes`.
+
+When testing this type of directive we should remember to mock this data to test different cases. To achieve this goal we need to mock the `scope` that is passed to the `$compile` service, and (_obviously_) to pass the attributes.
+
+Here an example:
+```
+scope = $rootScope.$new();
+scope.products = [...];
+scope.pageSize = 2;
+
+element = angular.element('<product-list products="products" page-size="{{pageSize}}"></product-list>');
+
+$compile(element)(scope);
+```
+
+#### Accessing Isolated Scope
+
+To access the directive's `isolatedScope`, Angular provide us an helper method that can be called after the `$compile` and the `$digest`, that is:
+
+`var isolatedScope = element.isolateScope();`
+
+We can use this method to read the directive `scope` values and check out expectations.

@@ -22,7 +22,11 @@ module.exports = function(config) {
       'src/vendor/angular-mocks/angular-mocks.js',
       'src/js/main.js',
       'src/js/*.js',
-      'spec/unit/*.test.js'
+      'spec/unit/*.test.js',
+
+      // load the html files
+      // they have to be preprocessed and cached
+      'src/views/**/*.html'
     ],
 
 
@@ -34,6 +38,12 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+      'src/views/**/*.html': 'ng-html2js'
+    },
+
+    ngHtml2JsPreprocessor: {
+      stripPrefix: 'src/', //strip the src path from template url (http://stackoverflow.com/questions/22869668/karma-unexpected-request-when-testing-angular-directive-even-with-ng-html2js)
+      moduleName: 'templates' // define the template module name
     },
 
 
