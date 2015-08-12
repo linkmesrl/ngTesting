@@ -78,14 +78,25 @@ As you have defined a `npm test` script, you can execute your test with this com
 
 ![Karma message for working tests](./readme_assets/testEnv.png)
 
-## Our first Spec
+## Our first Spec / Testing a Controller
 
 Create a `listCtrl.test.js` in `spec/unit` folder.
 
-We need to test the `addProduct()` function, so the step we need to do are:
+In oder to test the `addProduct()` function, so the step we need to do are:
 
 - Load the module before any test
 - Inject the `$controller` mock before any test
 - Setup our `listController` with a mocked `$scope`
 - Trigger the `addProduct()` function
+- Check for the expected result
+
+## Testing a Service
+
+Create a `cartService.test.js` in `spec/unit` folder.
+
+In order to test `add()` and `remove()` function, we need to:
+
+- Load the module before any test
+- Inject the service to be tested
+- Trigger the functions
 - Check for the expected result
