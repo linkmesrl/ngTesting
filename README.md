@@ -127,7 +127,7 @@ Basically it loads our `templates` and create an angular module that provide the
 
 In `karma.conf.js` add:
 
-```
+``` javascript
     files: [
         ...,
         // load the html files
@@ -152,7 +152,7 @@ Often Angular's directive grab their data trough an `isolatedScope`, and the dat
 When testing this type of directive we should remember to mock this data to test different cases. To achieve this goal we need to mock the `scope` that is passed to the `$compile` service, and (_obviously_) to pass the attributes.
 
 Here an example:
-```
+``` javascript
 scope = $rootScope.$new();
 scope.products = [...];
 scope.pageSize = 2;
@@ -186,7 +186,7 @@ In a context of `isolation` is a good idea to mock all the `http` request from o
 
 Angular provide a service called `$httpBackend` that is intended to mock our request, and it can be configured in this way:
 
-```
+``` javascript
 beforeEach(inject(function($http, $rootScope){
     rootScope = $rootScope;
     http = $http;
@@ -199,3 +199,20 @@ beforeEach(inject(function($httpBackend){
 ```
 
 This is also a good method to test server errors handling, providing fake responses.
+
+## Testing Filters
+
+To test angular `filter` we need to inject it in our test with the `$filter` service, in this way:
+
+``` javascript
+beforeEach(function () {
+  inject(function (_$filter_) {
+    $filter = _$filter_;
+  });
+});
+
+it('...', function(){
+  // call the filter function
+  var res = $filter('filterName')(input, param);
+})
+```
