@@ -121,5 +121,79 @@ describe('The Product List Directive', function() {
       expect(angular.element(firsElementInList).text()).toEqual('Mango');
     });
 
+
+  });
+});
+
+describe('when the cartService.add() is called it', function() {
+
+  var mockService, scope, element;
+
+  // injecting main module
+  beforeEach(module('groceryStore'));
+
+  // preload Html Templates with ng-html2js
+  beforeEach(module('templates'));
+
+  // mock the service
+  beforeEach(function(){
+    module(function($provide){
+      $provide.service('cartService', function(){
+        this.add = jasmine.createSpy('add');
+      });
+    });
+  })
+
+  // inject the mocked service
+  beforeEach(inject(function(cartService){
+    // The injector unwraps the underscores (_) from around the parameter names when matching
+    mockService = cartService;
+  }));
+
+  // injecting and bootstrapping the directive
+  beforeEach(inject(function ($compile, $rootScope) {
+    scope = $rootScope.$new();
+
+    scope.products = [
+      {
+        category: 'Fruit',
+        name: 'Apple',
+        quantity: 12
+      },
+      {
+        category: 'Fruit',
+        name: 'Banana',
+        quantity: 10
+      },
+      {
+        category: 'Fruit',
+        name: 'Mango',
+        quantity: 12
+      },
+      {
+        category: 'Fruit',
+        name: 'Pineapple',
+        quantity: 10
+      }
+    ];
+
+    scope.pageSize = 2;
+
+    element = angular.element('<product-list products="products" page-size="{{pageSize}}"></product-list>');
+    $compile(element)(scope);
+    scope.$digest();
+  }));
+
+  it('should be called with the correct params', function(){
+
+    //reading the isolated scope
+    var isolatedScope = element.isolateScope();
+
+    var product = isolatedScope.products[0];
+
+    isolatedScope.addToCart(product);
+
+    expect(mockService.add).toHaveBeenCalled();
+    expect(mockService.add).toHaveBeenCalledWith(product);
   });
 });

@@ -169,3 +169,13 @@ To access the directive's `isolatedScope`, Angular provide us an helper method t
 `var isolatedScope = element.isolateScope();`
 
 We can use this method to read the directive `scope` values and check out expectations.
+
+## Spy On external function
+
+We should run our test in `isolated` context, but for sure wee need to test that our calls to external `methods`, such as `services`, are done with the correct parameters.
+
+Jasmine provide a `spyOn` method that let us check this, the steps are:
+
+- Mock the external service
+- Mock the function with a `spy`
+- Check the `spy`
