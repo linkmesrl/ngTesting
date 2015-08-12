@@ -100,3 +100,21 @@ In order to test `add()` and `remove()` function, we need to:
 - Inject the service to be tested
 - Trigger the functions
 - Check for the expected result
+
+## Testing Directives
+
+Create a `smallCart.test.js` in `spec/unit` folder.
+
+In order to test a `directive` we need to **compile** the template and to force a **digest** cicle, so hour steps are:
+
+- Load the module before any test
+- Inject and compile the directive
+- Force a digest cicle
+- Check for the expected result
+
+### Mocking angular service
+
+As this directive is using `cartService` to retrieve cart data, we should mock it to run our tests in Isolation. To mock the service our steps are:
+
+- Inject `cartService`
+- Mock out `.cart` data
