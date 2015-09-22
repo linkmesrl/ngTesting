@@ -4,8 +4,9 @@
   "description": "A basic environment for angular testing",
   "main": "index.js",
   "scripts": {
-    "start": "eslint .; browser-sync start --server src --files='src/**/*.html, src/**/*.js'",
-    "lint": "eslint ."
+    "prestart": "npm run lint",
+    "start": "browser-sync start --server src --files='src/**/*.html, src/**/*.js'",
+    "lint": "eslint ./src/js;"
   },
   "author": "Matteo Scandolo",
   "license": "MIT",
