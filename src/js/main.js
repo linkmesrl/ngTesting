@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('groceryStore', ['ngRoute', 'uiGmapgoogle-maps'])
+angular.module('groceryStore', ['ngRoute'])
 .config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
